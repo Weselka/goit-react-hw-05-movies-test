@@ -1,4 +1,5 @@
 import { Outlet } from 'react-router-dom';
+import { Suspense } from 'react';
 import {
   MovieWrapper,
   MovieBox,
@@ -8,7 +9,8 @@ import {
   MovieSubTittle,
   LinkWrapperSecondary,
   NavLinkSecondary,
-} from './MovieInfo.styled';
+  Loader,
+} from 'components';
 
 const imgBaseUrl = 'https://image.tmdb.org/t/p/w300';
 
@@ -48,7 +50,9 @@ export const MovieInfo = ({ movie }) => {
         <NavLinkSecondary to="cast">Cast</NavLinkSecondary>
         <NavLinkSecondary to="reviews">Reviews</NavLinkSecondary>
       </LinkWrapperSecondary>
-      <Outlet />
+      <Suspense fallback={<Loader />}>
+        <Outlet />
+      </Suspense>
     </MovieBox>
   );
 };
